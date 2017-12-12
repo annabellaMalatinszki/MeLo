@@ -18,7 +18,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MaxWidth="800"/>
             <ColumnDefinition Width="*" MaxWidth="200"/>
+            <ColumnDefinition Width="*" MaxWidth="200"/>
         </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="2" Grid.Row="1" Name="LstProduct" ItemsSource="{Binding FilesCollection}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=FullName}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <ListBox Grid.Column="1" Grid.Row="1" x:Name="recentlyOpenedFileList">
             

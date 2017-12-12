@@ -20,10 +20,16 @@ namespace WPFGUI.Audio_and_Video
         {
             InitializeComponent();
             support = new GUISupport();
+            Loaded += new RoutedEventHandler(MainWindow_Loaded);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new FileSystemViewModel();
         }
 
         private void timer_Tick(object sender, EventArgs e)
