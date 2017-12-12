@@ -44,14 +44,10 @@ namespace WPFGUI.Audio_and_Video
 
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (support.OpenFile() != null)
-            {
                 mePlayer.Source = support.OpenFile();
                 recentlyOpenedFileList.ItemsSource = support.Filenames;
-
                 mePlayer.Play();
                 mediaPlayerIsPlaying = true;
-            }
         }
 
         private void Play_CanExecute(object sender, CanExecuteRoutedEventArgs e)
