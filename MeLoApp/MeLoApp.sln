@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLoBackEnd", "MeLoBackEnd\MeLoBackEnd.csproj", "{549E298D-90C8-4AAE-8187-EA879D2B77AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLoGUI", "..\..\..\..\..\source\repos\WPFMediaPlayer\WPFMediaPlayer\MeLoGUI.csproj", "{1710488B-DED7-4B08-8D76-3288BF40CF68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeLoGUI", "WPFMediaPlayer\MeLoGUI.csproj", "{1710488B-DED7-4B08-8D76-3288BF40CF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
