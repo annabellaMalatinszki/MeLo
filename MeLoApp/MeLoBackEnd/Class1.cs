@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeLoBackEnd
 {
-    public class MeLo
+    public class Class1
     {
     }
 }
