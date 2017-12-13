@@ -13,9 +13,17 @@ namespace MeLoBackEnd
         AppConfig appConfig;
         Serializer serializer = new Serializer();
 
+        private static string configFileName = "AppConfig.xml";
+
+        public static string ConfigFileName
+        {
+            get { return configFileName = "AppConfig.xml"; }
+        }
+
+
         public ConfigHandler()
         {
-            if (File.Exists("AppConfig.xml"))
+            if (File.Exists(configFileName))
             {
                 appConfig = serializer.DeserializeConfig();
                 // set the preferred filepath and the list of the recently opened files in the GUISupport according to AppConfig
