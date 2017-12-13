@@ -26,7 +26,8 @@
         <ListView Grid.Column="1" 
                   Grid.Row="1" 
                   x:Name="recentlyOpenedFileList" 
-                  SelectionChanged="recentlyOpenedFileList_SelectionChanged">
+                  SelectionChanged="RecentlyOpenedFileList_SelectionChanged"
+                  Cursor="Hand">
             
         </ListView>
 
@@ -92,13 +93,21 @@
             </StatusBarItem>
             <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
                 <Slider Name="sliProgress" 
-                        Thumb.DragStarted="sliProgress_DragStarted"  
-                        Thumb.DragCompleted="sliProgress_DragCompleted" 
-                        ValueChanged="sliProgress_ValueChanged" 
+                        Thumb.DragStarted="SliProgress_DragStarted"  
+                        Thumb.DragCompleted="SliProgress_DragCompleted" 
+                        ValueChanged="SliProgress_ValueChanged" 
                         Cursor="Hand"/>
             </StatusBarItem>
             <StatusBarItem Grid.Column="2">
                 <ProgressBar Name="pbVolume" Width="50" Height="12" Maximum="1" Value="{Binding ElementName=mePlayer, Path=Volume}" />
+            </StatusBarItem>
+            <StatusBarItem  Grid.Column="3">
+                <TextBlock 
+                        x:Name="lblTotalTime"
+                        Grid.Row="3"
+                        FontSize="20" 
+                        FontFamily="Comic Sans MS"
+                        >00:00:00</TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>
