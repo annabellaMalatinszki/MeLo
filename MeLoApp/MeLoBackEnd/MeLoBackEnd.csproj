@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
     <Compile Include="AudioFile.cs" />
-    <Compile Include="FileHandler.cs" />
+    <Compile Include="ConfigHandler.cs" />
     <Compile Include="ImageFile.cs" />
     <Compile Include="MediaFile.cs" />
     <Compile Include="MeLo.cs" />
