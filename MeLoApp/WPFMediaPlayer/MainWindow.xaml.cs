@@ -115,7 +115,6 @@ namespace WPFGUI.Audio_and_Video
         private void recentlyOpenedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             string selectedFile = recentlyOpenedFileList.SelectedItem.ToString();
-            label1.Content = selectedFile;
             foreach (FileDialog file in support.RecentlyOpenedFiles)
             {
                 if (file.SafeFileName.Equals(selectedFile))

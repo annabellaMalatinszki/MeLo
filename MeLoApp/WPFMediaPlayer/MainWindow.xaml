@@ -15,24 +15,47 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" MinHeight="600"/>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="800"/>
-            <ColumnDefinition Width="*" MaxWidth="200"/>
+            <ColumnDefinition Width="*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
 
-        <ListView Grid.Column="1" Grid.Row="1" x:Name="recentlyOpenedFileList" SelectionChanged="recentlyOpenedFileList_SelectionChanged">
+        <!-- Content -->
+        <ListView Grid.Column="1" 
+                  Grid.Row="1" 
+                  x:Name="recentlyOpenedFileList" 
+                  SelectionChanged="recentlyOpenedFileList_SelectionChanged">
             
         </ListView>
-        <Label x:Name="label1" Grid.Column="1" Grid.Row="2">HAHAHA</Label>
+
+        <!-- Content Toolbar -->
         <ToolBar Height="25" Grid.Row="0" Grid.Column="1">
             <Button Command="ApplicationCommands.Open">
                 <Image Source="pack://siteoforigin:,,,/Images/folder.png" Width="25"/>
             </Button>
-            <Button></Button>
-            <Button></Button>
         </ToolBar>
-        <ToolBar Height="25" Grid.Row="0">
+
+        <!-- Mediaplayer -->
+        <Border Grid.Row="0" Grid.RowSpan="2">
+            <Border.Background>
+                <ImageBrush x:Name="playerBackground" 
+                            ImageSource="C:\Users\Zsolt Nagy\dotNET\TW\4thweek\MeLo\MeLoApp\WPFMediaPlayer\Images\zerone.png" 
+                            Stretch="Fill"/>
+            </Border.Background>
+
+            <MediaElement Name="mediaPlayer" 
+                      Grid.Row="1" 
+                      LoadedBehavior="Manual" 
+                      Stretch="Fill" 
+                      />
+        </Border>
+
+        <!-- Media Toolbar -->
+        <ToolBar Height="25" 
+                 Grid.Row="2" 
+                 Grid.ColumnSpan="2">
             <Button Command="ApplicationCommands.Open">
                 <Image Source="pack://siteoforigin:,,,/Images/folder.png" Width="25"/>
             </Button>
@@ -47,22 +70,9 @@
                 <Image Source="pack://siteoforigin:,,,/Images/stop.jpg" Width="25" />
             </Button>
         </ToolBar>
-
-        <Border Grid.Row="1" >
-            <Border.Background>
-                <ImageBrush x:Name="playerBackground" 
-                            ImageSource="C:\Users\Zsolt Nagy\dotNET\TW\4thweek\MeLo\MeLoApp\WPFMediaPlayer\Images\zerone.png" 
-                            Stretch="Fill"/>
-            </Border.Background>
-
-            <MediaElement Name="mediaPlayer" 
-                      Grid.Row="1" 
-                      LoadedBehavior="Manual" 
-                      Stretch="Fill" 
-                      />
-        </Border>
-
-        <StatusBar Grid.Row="2">
+        
+        <!-- Slider -->
+        <StatusBar Grid.Row="3"  Grid.ColumnSpan="2">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
