@@ -122,6 +122,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\background.png" />
     <Content Include="Images\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

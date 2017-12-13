@@ -28,12 +28,12 @@ namespace WPFGUI.Audio_and_Video
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if ((mePlayer.Source != null) && (mePlayer.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
+            if ((mediaPlayer.Source != null) && (mediaPlayer.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
             {
                 sliProgress.Minimum = 0;
-                sliProgress.Maximum = mePlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                sliProgress.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 // we should write length of the sound/movie to the gui
-                sliProgress.Value = mePlayer.Position.TotalSeconds;
+                sliProgress.Value = mediaPlayer.Position.TotalSeconds;
             }
         }
 
@@ -44,21 +44,27 @@ namespace WPFGUI.Audio_and_Video
 
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-                mePlayer.Source = support.OpenFile();
+                mediaPlayer.Source = support.OpenFile();
                 recentlyOpenedFileList.ItemsSource = support.Filenames;
-                mePlayer.Play();
-                mediaPlayerIsPlaying = true;
+                PlayMediaPlayer();
         }
 
         private void Play_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (mePlayer != null) && (mePlayer.Source != null);
+            e.CanExecute = (mediaPlayer != null) && (mediaPlayer.Source != null);
         }
 
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            mePlayer.Play();
+            PlayMediaPlayer();
+        }
+
+        private void PlayMediaPlayer()
+        {
+            mediaPlayer.Play();
+            //mediaPlayer.
             mediaPlayerIsPlaying = true;
+
         }
 
         private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -68,7 +74,7 @@ namespace WPFGUI.Audio_and_Video
 
         private void Pause_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            mePlayer.Pause();
+            mediaPlayer.Pause();
         }
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -78,7 +84,7 @@ namespace WPFGUI.Audio_and_Video
 
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            mePlayer.Stop();
+            mediaPlayer.Stop();
             mediaPlayerIsPlaying = false;
         }
 
@@ -90,7 +96,7 @@ namespace WPFGUI.Audio_and_Video
         private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             userIsDraggingSlider = false;
-            mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
+            mediaPlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
             // go back to start
         }
 
@@ -101,8 +107,23 @@ namespace WPFGUI.Audio_and_Video
 
         private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            mePlayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
+            mediaPlayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         }
 
+
+
+        private void recentlyOpenedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            string selectedFile = recentlyOpenedFileList.SelectedItem.ToString();
+            label1.Content = selectedFile;
+            foreach (FileDialog file in support.RecentlyOpenedFiles)
+            {
+                if (file.SafeFileName.Equals(selectedFile))
+                {
+                    mediaPlayer.Source = new Uri(file.FileName); ;
+                    PlayMediaPlayer();
+                }
+            }
+        }
     }
 }

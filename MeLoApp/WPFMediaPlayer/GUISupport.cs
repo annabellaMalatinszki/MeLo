@@ -10,9 +10,13 @@ namespace WPFMediaPlayer
 {
     class GUISupport
     {
-        List<OpenFileDialog> recentlyOpenedFiles = new List<OpenFileDialog>();
+        private List<OpenFileDialog> recentlyOpenedFiles = new List<OpenFileDialog>();
         private ObservableCollection<String> filenames = new ObservableCollection<string>();
 
+        public List<OpenFileDialog> RecentlyOpenedFiles
+        {
+            get { return recentlyOpenedFiles; }
+        }
         public ObservableCollection<String> Filenames
         {
             get { return filenames; }
