@@ -13,6 +13,8 @@ namespace WPFGUI.Audio_and_Video
         private GUISupport support;
         private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
+        private Uri previous;
+        private Uri next;
 
         public AudioVideoPlayerCompleteSample()
         {
@@ -24,7 +26,7 @@ namespace WPFGUI.Audio_and_Video
         {
             support = new GUISupport();
             support.ReadBackFilesFromMemory();
-            recentlyOpenedFileList.ItemsSource = support.Filenames;
+            openedFileList.ItemsSource = support.Filenames;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -51,7 +53,7 @@ namespace WPFGUI.Audio_and_Video
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
                 mediaPlayer.Source = support.OpenFile();
-                recentlyOpenedFileList.ItemsSource = support.Filenames;
+                openedFileList.ItemsSource = support.Filenames;
                 PlayMediaPlayer();
         }
 
@@ -65,11 +67,66 @@ namespace WPFGUI.Audio_and_Video
             PlayMediaPlayer();
         }
 
+        private void Rewind_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (mediaPlayer != null) && (mediaPlayer.Source != null);
+        }
+
+        private void Rewind_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+            PlayMediaPlayer();
+        }
+
+
         private void PlayMediaPlayer()
         {
             mediaPlayer.Play();
             mediaPlayerIsPlaying = true;
 
+        }
+
+        private void Previous_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (previous != null)
+            {
+                e.CanExecute = true;
+            } else
+            {
+                e.CanExecute = false;
+            }
+
+        }
+
+        private void Previous_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (previous != null)
+            {
+                next = mediaPlayer.Source;
+                mediaPlayer.Source = previous;
+                previous = null;
+                PlayMediaPlayer();
+            }
+        }
+
+        private void Next_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (next != null)
+            {
+                e.CanExecute = true;
+            }
+            else
+            {
+                e.CanExecute = false;
+            }
+        }
+
+        private void Next_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            previous = mediaPlayer.Source;
+            mediaPlayer.Source = next;
+            next = null;
+            PlayMediaPlayer();
         }
 
         private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -90,6 +147,7 @@ namespace WPFGUI.Audio_and_Video
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             mediaPlayer.Stop();
+            previous = mediaPlayer.Source;
             mediaPlayerIsPlaying = false;
         }
 
@@ -100,6 +158,7 @@ namespace WPFGUI.Audio_and_Video
 
         private void SliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
         {
+            previous = mediaPlayer.Source;
             userIsDraggingSlider = false;
             mediaPlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
             // go back to start
@@ -115,14 +174,15 @@ namespace WPFGUI.Audio_and_Video
             mediaPlayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         }
 
-        private void RecentlyOpenedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void openedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            string selectedFile = recentlyOpenedFileList.SelectedItem.ToString();
+            previous = mediaPlayer.Source;
+            string selectedFile = openedFileList.SelectedItem.ToString();
             foreach (FileDialog file in support.RecentlyOpenedFiles)
             {
                 if (file.SafeFileName.Equals(selectedFile))
                 {
-                    mediaPlayer.Source = new Uri(file.FileName); ;
+                    mediaPlayer.Source = new Uri(file.FileName);
                     PlayMediaPlayer();
                 }
             }
