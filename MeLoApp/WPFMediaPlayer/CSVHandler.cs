@@ -9,8 +9,10 @@ namespace WPFMediaPlayer
 {
     class CsvHandler
     {
+        // In the future we should add a method to change the memory path
         string memoryPath = Environment.CurrentDirectory + "memoryTest.csv";
 
+        // AppendAllText creates a file if it doesnt exists
         public void SaveFilePath(string filePath)
         {
             File.AppendAllText(memoryPath, filePath + Environment.NewLine);
