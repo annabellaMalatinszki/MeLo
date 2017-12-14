@@ -24,7 +24,7 @@ namespace WPFGUI.Audio_and_Video
         {
             support = new GUISupport();
             support.ReadBackFilesFromMemory();
-            recentlyOpenedFileList.ItemsSource = support.Filenames;
+            openedFileList.ItemsSource = support.Filenames;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -51,7 +51,7 @@ namespace WPFGUI.Audio_and_Video
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
                 mediaPlayer.Source = support.OpenFile();
-                recentlyOpenedFileList.ItemsSource = support.Filenames;
+                openedFileList.ItemsSource = support.Filenames;
                 PlayMediaPlayer();
         }
 
@@ -64,6 +64,18 @@ namespace WPFGUI.Audio_and_Video
         {
             PlayMediaPlayer();
         }
+
+        private void Rewind_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (mediaPlayer != null) && (mediaPlayer.Source != null);
+        }
+
+        private void Rewind_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+            PlayMediaPlayer();
+        }
+
 
         private void PlayMediaPlayer()
         {
@@ -115,9 +127,9 @@ namespace WPFGUI.Audio_and_Video
             mediaPlayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
         }
 
-        private void RecentlyOpenedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void openedFileList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            string selectedFile = recentlyOpenedFileList.SelectedItem.ToString();
+            string selectedFile = openedFileList.SelectedItem.ToString();
             foreach (FileDialog file in support.RecentlyOpenedFiles)
             {
                 if (file.SafeFileName.Equals(selectedFile))

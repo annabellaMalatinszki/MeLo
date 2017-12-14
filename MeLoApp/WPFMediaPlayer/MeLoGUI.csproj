@@ -126,6 +126,9 @@
     <Content Include="Images\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\rewind.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\stop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

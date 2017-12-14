@@ -9,6 +9,7 @@
         <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed" />
         <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
         <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
+        <CommandBinding Command="MediaCommands.Rewind" CanExecute="Rewind_CanExecute" Executed="Rewind_Executed" />
     </Window.CommandBindings>
     <Grid MouseWheel="Grid_MouseWheel">
         <Grid.RowDefinitions>
@@ -25,8 +26,8 @@
         <!-- Content -->
         <ListView Grid.Column="1" 
                   Grid.Row="1" 
-                  x:Name="recentlyOpenedFileList" 
-                  SelectionChanged="RecentlyOpenedFileList_SelectionChanged"
+                  x:Name="openedFileList" 
+                  SelectionChanged="openedFileList_SelectionChanged"
                   Cursor="Hand">
             
         </ListView>
@@ -70,6 +71,9 @@
             </Button>
             <Button Command="MediaCommands.Stop">
                 <Image Source="pack://siteoforigin:,,,/Images/stop.png" Width="32" Cursor="Hand"/>
+            </Button>
+            <Button Command="MediaCommands.Rewind">
+                <Image Source="pack://siteoforigin:,,,/Images/rewind.png" Width="32" Cursor="Hand"/>
             </Button>
         </ToolBar>
         
