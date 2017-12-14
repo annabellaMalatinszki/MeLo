@@ -10,6 +10,8 @@
         <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
         <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed" />
         <CommandBinding Command="MediaCommands.Rewind" CanExecute="Rewind_CanExecute" Executed="Rewind_Executed" />
+        <CommandBinding Command="MediaCommands.PreviousTrack" CanExecute="Previous_CanExecute" Executed="Previous_Executed" />
+        <CommandBinding Command="MediaCommands.NextTrack" CanExecute="Next_CanExecute" Executed="Next_Executed" />
     </Window.CommandBindings>
     <Grid MouseWheel="Grid_MouseWheel">
         <Grid.RowDefinitions>
@@ -62,12 +64,18 @@
                 <Image Source="pack://siteoforigin:,,,/Images/folder.png" Width="32" Cursor="Hand"/>
             </Button>
             <Separator />
+            <Button Command="MediaCommands.PreviousTrack">
+                <Image Source="pack://siteoforigin:,,,/Images/back.png" Width="32" Cursor="Hand"/>
+            </Button>
             <Button Command="MediaCommands.Play">
                 <Image Source="pack://siteoforigin:,,,/Images/play.png" Width="32" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Pause">
                 <Image Source="pack://siteoforigin:,,,/Images/pause.png" Width="32"
                        Cursor="Hand"/>
+            </Button>
+            <Button Command="MediaCommands.NextTrack">
+                <Image Source="pack://siteoforigin:,,,/Images/next.png" Width="32" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Stop">
                 <Image Source="pack://siteoforigin:,,,/Images/stop.png" Width="32" Cursor="Hand"/>
