@@ -17,7 +17,14 @@ namespace WPFGUI.Audio_and_Video
         public AudioVideoPlayerCompleteSample()
         {
             InitializeComponent();
+            Loaded += MediaPlayerLoaded;
+        }
+
+        private void MediaPlayerLoaded(object sender, RoutedEventArgs e)
+        {
             support = new GUISupport();
+            support.ReadBackFilesFromMemory();
+            recentlyOpenedFileList.ItemsSource = support.Filenames;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
@@ -30,7 +37,6 @@ namespace WPFGUI.Audio_and_Video
             {
                 sliProgress.Minimum = 0;
                 sliProgress.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                // we should write length of the sound/movie to the gui
                 sliProgress.Value = mediaPlayer.Position.TotalSeconds;
                 lblTotalTime.Text = TimeSpan.FromSeconds(sliProgress.Maximum).ToString(@"hh\:mm\:ss");
             }
@@ -61,7 +67,6 @@ namespace WPFGUI.Audio_and_Video
         private void PlayMediaPlayer()
         {
             mediaPlayer.Play();
-            //mediaPlayer.
             mediaPlayerIsPlaying = true;
 
         }
