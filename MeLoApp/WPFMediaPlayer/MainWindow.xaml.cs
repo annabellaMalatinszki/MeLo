@@ -30,7 +30,6 @@ namespace WPFGUI.Audio_and_Video
             {
                 sliProgress.Minimum = 0;
                 sliProgress.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                // we should write length of the sound/movie to the gui
                 sliProgress.Value = mediaPlayer.Position.TotalSeconds;
                 lblTotalTime.Text = TimeSpan.FromSeconds(sliProgress.Maximum).ToString(@"hh\:mm\:ss");
             }
@@ -61,7 +60,6 @@ namespace WPFGUI.Audio_and_Video
         private void PlayMediaPlayer()
         {
             mediaPlayer.Play();
-            //mediaPlayer.
             mediaPlayerIsPlaying = true;
 
         }

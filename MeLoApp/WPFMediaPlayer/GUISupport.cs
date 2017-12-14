@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace WPFMediaPlayer
 {
-    class GUISupport
+    public class GUISupport
     {
         private List<OpenFileDialog> recentlyOpenedFiles = new List<OpenFileDialog>();
         private ObservableCollection<String> filenames = new ObservableCollection<string>();
+        private CsvHandler csv = new CsvHandler();
 
         public List<OpenFileDialog> RecentlyOpenedFiles
         {
@@ -21,6 +22,7 @@ namespace WPFMediaPlayer
         {
             get { return filenames; }
         }
+
 
         public Uri OpenFile()
         {
@@ -32,12 +34,24 @@ namespace WPFMediaPlayer
             {
                 recentlyOpenedFiles.Add(openFileDialog);
                 filenames.Add(openFileDialog.SafeFileName);
+                csv.SaveFilePath(openFileDialog.FileName);
                 return new Uri(openFileDialog.FileName);
             }
             else
             {
                 return null;
             }
+        }
+        public int Add(int num1, int num2)
+        {
+            int result = num1 + num2;
+            return result;
+        }
+
+        public int Mul(int num1, int num2)
+        {
+            int result = num1 * num2;
+            return result;
         }
     }
 }
