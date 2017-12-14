@@ -30,7 +30,9 @@
                   Grid.Row="1" 
                   x:Name="openedFileList" 
                   SelectionChanged="openedFileList_SelectionChanged"
-                  Cursor="Hand">
+                  Cursor="Hand"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
             
         </ListView>
 
@@ -57,36 +59,38 @@
         </Border>
 
         <!-- Media Toolbar -->
-        <ToolBar Height="32"
+        <ToolBar Height="48"
                  Grid.Row="2" 
                  Grid.ColumnSpan="2">
             <Button Command="ApplicationCommands.Open">
-                <Image Source="pack://siteoforigin:,,,/Images/folder.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/folder.png" Width="48" Cursor="Hand"/>
             </Button>
             <Separator />
             <Button Command="MediaCommands.PreviousTrack">
-                <Image Source="pack://siteoforigin:,,,/Images/back.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/back.png" Width="48" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Play">
-                <Image Source="pack://siteoforigin:,,,/Images/play.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/play.png" Width="48" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Pause">
-                <Image Source="pack://siteoforigin:,,,/Images/pause.png" Width="32"
+                <Image Source="pack://siteoforigin:,,,/Images/pause.png" Width="48"
                        Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.NextTrack">
-                <Image Source="pack://siteoforigin:,,,/Images/next.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/next.png" Width="64" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Stop">
-                <Image Source="pack://siteoforigin:,,,/Images/stop.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/stop.png" Width="64" Cursor="Hand"/>
             </Button>
             <Button Command="MediaCommands.Rewind">
-                <Image Source="pack://siteoforigin:,,,/Images/rewind.png" Width="32" Cursor="Hand"/>
+                <Image Source="pack://siteoforigin:,,,/Images/rewind.png" Width="64" Cursor="Hand"/>
             </Button>
         </ToolBar>
         
         <!-- Slider -->
-        <StatusBar Grid.Row="3"  Grid.ColumnSpan="2">
+        <StatusBar Grid.Row="3"  
+                   Grid.ColumnSpan="2" 
+                   Height="60">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
@@ -100,7 +104,8 @@
             </StatusBar.ItemsPanel>
             <StatusBarItem>
                 <TextBlock Name="lblProgressStatus" 
-                           FontSize="20" FontFamily="Comic Sans MS"
+                           FontSize="30" FontFamily="Comic Sans MS"
+                           VerticalAlignment="Top"
                            >00:00:00</TextBlock>
             </StatusBarItem>
             <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
@@ -117,8 +122,9 @@
                 <TextBlock 
                         x:Name="lblTotalTime"
                         Grid.Row="3"
-                        FontSize="20" 
+                        FontSize="30" 
                         FontFamily="Comic Sans MS"
+                    VerticalAlignment="Top"
                         >00:00:00</TextBlock>
             </StatusBarItem>
         </StatusBar>
