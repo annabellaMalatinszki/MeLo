@@ -23,6 +23,17 @@ namespace WPFMediaPlayer
             get { return filenames; }
         }
 
+        public void ReadBackFilesFromMemory()
+        {
+            string[] savedFilePaths = csv.ReadBackMemoryFile();
+            foreach (string filePath in savedFilePaths)
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.FileName = filePath;
+                filenames.Add(ofd.SafeFileName);
+                recentlyOpenedFiles.Add(ofd);
+            }
+        }
 
         public Uri OpenFile()
         {

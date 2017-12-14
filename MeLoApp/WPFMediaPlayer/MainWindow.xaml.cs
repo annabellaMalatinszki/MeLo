@@ -17,7 +17,14 @@ namespace WPFGUI.Audio_and_Video
         public AudioVideoPlayerCompleteSample()
         {
             InitializeComponent();
+            Loaded += MediaPlayerLoaded;
+        }
+
+        private void MediaPlayerLoaded(object sender, RoutedEventArgs e)
+        {
             support = new GUISupport();
+            support.ReadBackFilesFromMemory();
+            recentlyOpenedFileList.ItemsSource = support.Filenames;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
